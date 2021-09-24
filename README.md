@@ -19,7 +19,7 @@ Como jugador debes poner un username al iniciar el juego y luego poner start gam
 
 El código del juego está estructurado de la siguiente manera, tenemos la carpeta ```Assets```, donde se encuentra toda la lógica y los principales assets asociados al juego. Los scripts dentro de ```Assets/Game - 4 3D breakout/scripts```  controlan la lógica del juego en sí, mientras que para la lógica del menú es ```Assets/MainMenu/MainMenu.cs```.
 
-El archivo del puntaje se guarda una carpeta más arriba de la raíz del código, ```../puntajes.txt```. Estos guardan el nombre insertado y el puntaje más alto.
+El archivo del puntaje se guarda una carpeta más arriba de la raíz del código, ```../puntajes.txt```. Estos guardan el nombre insertado y el puntaje alto.
 
 Grupo22:
 - Felipe Lois
