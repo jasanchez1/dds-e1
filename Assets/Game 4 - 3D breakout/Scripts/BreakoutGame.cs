@@ -1,11 +1,15 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using System.IO;
+
+// La escritura de punatajes fue obtenida de este link:https://docs.microsoft.com/en-us/troubleshoot/dotnet/csharp/read-write-text-file
 
 public enum BreakoutGameState { playing, won, lost };
 
 public class BreakoutGame : MonoBehaviour
 {
+    public string playername;
     public static BreakoutGame SP;
 
     public Transform ballPrefab;
@@ -31,10 +35,10 @@ public class BreakoutGame : MonoBehaviour
     }
 
     void OnGUI(){
-    
+
         GUILayout.Space(10);
         GUILayout.Label("  Hit: " + blocksHit + "/" + totalBlocks);
-
+        playername = PlayerPrefs.GetString("playername");
         if (gameState == BreakoutGameState.lost)
         {
             GUILayout.Label("You Lost!");
@@ -73,6 +77,7 @@ public class BreakoutGame : MonoBehaviour
     public void WonGame()
     {
         Time.timeScale = 0.0f; //Pause game
+        WriteTXT();
         gameState = BreakoutGameState.won;
     }
 
@@ -88,6 +93,29 @@ public class BreakoutGame : MonoBehaviour
     public void SetGameOver()
     {
         Time.timeScale = 0.0f; //Pause game
+        WriteTXT();
         gameState = BreakoutGameState.lost;
+    }
+
+    public void WriteTXT()
+    {
+        try
+        {
+            StreamWriter sw;
+            if (File.Exists("../Puntajes.txt"))
+            {
+                sw = File.AppendText("../Puntajes.txt");
+            }
+            else {
+                sw = new StreamWriter("../Puntajes.txt");
+                sw.WriteLine("Puntajes!");
+            }
+            sw.WriteLine(playername +"  Hit: " + blocksHit + "/" + totalBlocks);
+            sw.Close();
+        }
+        finally
+        {
+            print("Written File!");
+        }
     }
 }

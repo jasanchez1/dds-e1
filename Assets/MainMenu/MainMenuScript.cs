@@ -5,6 +5,13 @@ using UnityEngine.UI;
 
 public class MainMenuScript : MonoBehaviour {
 
+    public string playername;
+
+    public void ReadInput(string input) {
+        playername = input;
+        PlayerPrefs.SetString("playername", playername);
+    }
+
     void Awake()
     {       
         //Make this script persistent(Not destroy when loading a new level)
@@ -55,7 +62,7 @@ public class MainMenuScript : MonoBehaviour {
         int topPix = (Screen.height - 450) / 2;
   
 
-        if (GUI.Button(new Rect(leftPix, topPix, 204, 158), "Start Game", invisibleButton))
+        if (GUI.Button(new Rect(leftPix, topPix, 204, 158), "Start Game"))
         {
             StartGame(1);
         }
