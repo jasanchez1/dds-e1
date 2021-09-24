@@ -1,4 +1,5 @@
 # dds-e1
+
 DDS-E1-G22 repository:
 
 The 3D Breakout game implementation you cant find in this repository
@@ -11,4 +12,3 @@ All credits to assetstore.unity.com for serving as the base code for this projec
 How to run the game:
 
 Lorem ipsum.
-
