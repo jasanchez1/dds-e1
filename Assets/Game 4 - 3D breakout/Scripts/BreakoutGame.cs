@@ -99,6 +99,9 @@ public class BreakoutGame : MonoBehaviour
     public void WonGame()
     {
         Time.timeScale = 0.0f; //Pause game
+        sblockshit = blocksHit;
+        stotalblocks = totalBlocks;
+        PostAsyncLink("http://localhost:3000/scores", username, sblockshit, stotalblocks);
         WriteTXT();
         gameState = BreakoutGameState.won;
     }
@@ -124,26 +127,20 @@ public class BreakoutGame : MonoBehaviour
         gameState = BreakoutGameState.lost;
     }
 
-    // esta función se obtuvo de la siguiente pagina:https://stackoverflow.com/questions/12009126/dictionary-with-variables-as-values/12014920
-    public class Variable
-    {
-        public object Value { get; set; }
-    }
-
     public static async void PostAsyncLink(string link, string username, int blockshit, int totalblocks)
     {
         var client = new HttpClient();
-        string puntaje = $"{blockshit}/{totalblocks}";
-        print(puntaje);
+        //string puntaje = $"{blockshit}/{totalblocks}";
+        print(blockshit.ToString());
 
         Dictionary<string, string> values = new Dictionary<string, string>();
 
         values.Add("player", username);
-        values.Add("score", puntaje);
+        values.Add("score", blockshit.ToString());
 
         var content = new FormUrlEncodedContent(values);
 
-        var response = await client.PostAsync("http://localhost:3000/scores", content);
+        var response = await client.PostAsync(link, content);
     }
 
     public void WriteTXT()
